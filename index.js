@@ -1,17 +1,11 @@
+// Initialising variables for packages and imported modules
 const inquirer = require('inquirer');
-const fs = require('fs');
-const http = require('http');
-const PORT = 8080;
-const generatePage = require('./generatePage');
-
-// Initialise aray for new team members
-const myTeam = [];
-
-// Initialise application
-const myPrompts = () => {
-
-
-};
+const Engineer = require('./scripts/classes.js');
+const Intern = require('./scripts/classes.js');
+const Manager = require('./scripts/classes.js');
+const htmlBase = require('./scripts/createHTML.js');
+const htmlProfiles = require('./scripts/createHTML.js');
+const htmlEnd = require('./scripts/createHTML.js');
 
 // Manager questions
 const managerQues = () => {
@@ -19,28 +13,27 @@ const managerQues = () => {
     {
       type: 'input',
       message: "Please enter the team manager's name: ",
-      name: 'managerName'
+      name: 'name'
     },
     {
       type: 'input',
       message: "Please enter the team manager's employee id: ",
-      name: 'managerId'
+      name: 'id'
     },
     {
       type: 'input',
       message: "Please enter the team manager's email address: ",
-      name: 'managerEmail'
+      name: 'email'
     },
     {
       type: 'input',
       message: "Please enter the team manager's office phone number: ",
-      name: 'managerNum'
+      name: 'phone'
     }
   ])
-  .then(({ managerName, managerId, managerEmail, managerNum }) => {
-    const manager = new Manager(managerName, managerId, managerEmail, managerNum);
-    myTeam.unshift(manager);
-    myHTML(manager);
+  .then(({ name, id, email, phone }) => {
+    const manager = new Manager(name, id, email, phone);
+    htmlBase();
     newQues();
   });
 };
@@ -50,17 +43,20 @@ const newQues = () => {
   inquirer.prompt([
     {
       type: 'list',
-      message: 'What position would you like to add to your team?',
-      name: 'newPosition',
+      message: 'What position would you like to add to your team? ',
+      name: 'newRole',
       choices: ['Engineer', 'Intern', 'Exit Application']
     }
-  ]).then(({ newPosition }) => {
-    switch(newPosition) {
-      case 'Engineer': engineerQues();
-      break;
-      case 'Intern': internQues();
-      break;
-    };
+  ]).then(({ newRole }) => {
+    if (newRole === 'Engineer') {
+      engineerQues();
+    }
+    else if (newRole === 'Intern') {
+      internQues();
+    }
+    else if (newRole === 'Exit Application') {
+      htmlEnd();
+    }
   });
 };
 
@@ -70,28 +66,27 @@ const engineerQues = () => {
     {
       type: 'input',
       message: 'Name of engineer: ',
-      name: 'engName'
+      name: 'name'
     },
     {
       type: 'input',
       message: "Engineer's ID number: ",
-      name: 'engID'
+      name: 'id'
     },
     {
       type: 'input',
       message: "Engineer's email address: ",
-      name: 'engEmail'
+      name: 'email'
     },
     {
       type: 'input',
       message: "Engineer's Github username: ",
-      name: 'engGit'
+      name: 'git'
     }
-  ]).then(({ engName, engID, engEmail, engGit }) => {
-    const engineer = new Engineer(engName, engID, engEmail, engGit)
-    myTeam.unshift(engineer);
-    myHTML();
-    internQues();
+  ]).then(({ name, id, email, git }) => {
+    const engineer = new Engineer(name, id, email, git)
+    htmlProfiles('engineer', engineer);
+    newQues();
   });
 }
 
@@ -100,34 +95,33 @@ const internQues = () => {
   inquirer.prompt([
     {
       type: 'input',
-      messge: "Intern's name: ",
-      name: 'internName'
+      message: "Intern's name: ",
+      name: 'name'
     },
     {
       type: 'input',
       message: "Intern's ID: ",
-      name: 'internID'
+      name: 'id'
     },
     {
       type: 'input',
       message: "Intern's email address: ",
-      name: 'internEmail'
+      name: 'email'
     },
     {
       type: 'input',
       message: "Intern's school: ",
-      name: 'internSchool'
+      name: 'school'
     }
-  ]).then(({ internName, internID, internEmail, internSchool }) => {
-    const intern = new Intern(internName, internID, internEmail, internSchool);
-    myTeam.unshift(intern);
-    myHTML();
+  ]).then(({ name, id, email, school }) => {
+    const intern = new Intern(name, id, email, school);
+    htmlProfiles('intern', intern);
     newQues();
   });
 }
 
-const myHTML = () => {
-  
-
-
-}
+// Initialise application
+const runApp = () => {
+  managerQues();
+};
+runApp();
