@@ -6,8 +6,11 @@
   border-bottom: solid black 2px;
 }
 
+body {
+  background-color: #EFE1CE;
+}
+
 .main {
-  border: blue solid 2px;
   display: flex;
   justify-content: center;
 }
@@ -18,16 +21,17 @@
   width: 40%;
   margin: 1%;
   position: relative;
-  border-radius: 5%;
+  background-color: #939597;
 }
 
 .title-box {
-  display: flex;
+  display: block;
+  text-align: center;
+  color: white;
+  padding-top: 2%;
   justify-content: center;
-  background-color: rgb(100, 139, 211);
+  background-color: rgb(27, 63, 131);
   height: 35%;
-  border-top-left-radius: 5%;
-  border-top-right-radius: 5%;
 }
 
 .details {
