@@ -1,11 +1,7 @@
 // Initialising variables for packages and imported modules
 const inquirer = require('inquirer');
-const Engineer = require('./scripts/classes.js');
-const Intern = require('./scripts/classes.js');
-const Manager = require('./scripts/classes.js');
-const htmlBase = require('./scripts/createHTML.js');
-const htmlProfiles = require('./scripts/createHTML.js');
-const htmlEnd = require('./scripts/createHTML.js');
+const employee = require('./scripts/classes.js');
+const m = require('./scripts/modules.js');
 
 // Manager questions
 const managerQues = () => {
@@ -32,9 +28,9 @@ const managerQues = () => {
     }
   ])
   .then(({ name, id, email, phone }) => {
-    const manager = new Manager(name, id, email, phone);
-    htmlBase();
-    newQues();
+    const manager = new employee.Manager(name, id, email, phone);
+    m.htmlProfiles('Manager', manager);
+    newQues();   
   });
 };
 
@@ -44,8 +40,8 @@ const newQues = () => {
     {
       type: 'list',
       message: 'What position would you like to add to your team? ',
-      name: 'newRole',
-      choices: ['Engineer', 'Intern', 'Exit Application']
+      choices: ['Engineer', 'Intern', 'Exit Application'],
+      name: 'newRole'
     }
   ]).then(({ newRole }) => {
     if (newRole === 'Engineer') {
@@ -55,7 +51,7 @@ const newQues = () => {
       internQues();
     }
     else if (newRole === 'Exit Application') {
-      htmlEnd();
+      m.htmlEnd();
     }
   });
 };
@@ -84,8 +80,8 @@ const engineerQues = () => {
       name: 'git'
     }
   ]).then(({ name, id, email, git }) => {
-    const engineer = new Engineer(name, id, email, git)
-    htmlProfiles('engineer', engineer);
+    const engineer = new employee.Engineer(name, id, email, git)
+    m.htmlProfiles('Engineer', engineer);
     newQues();
   });
 }
@@ -114,14 +110,15 @@ const internQues = () => {
       name: 'school'
     }
   ]).then(({ name, id, email, school }) => {
-    const intern = new Intern(name, id, email, school);
-    htmlProfiles('intern', intern);
+    const intern = new employee.Intern(name, id, email, school);
+    m.htmlProfiles('Intern', intern);
     newQues();
   });
 }
 
 // Initialise application
 const runApp = () => {
+  m.htmlBase();
   managerQues();
 };
 runApp();
