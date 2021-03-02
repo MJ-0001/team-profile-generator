@@ -11,7 +11,7 @@ const htmlBase = () => {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" 
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" 
     crossorigin="anonymous">
-    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="../assets/style.css">
     <title>Team Organisation Chart</title>
   </head>
   <body>
@@ -22,7 +22,7 @@ const htmlBase = () => {
     </div>
     <div class="container main">
   `;
-  fs.writeFile('index.html', html, err => {
+  fs.writeFile('./dist/index.html', html, err => {
     if (err) {
       console.log(err);
     }
@@ -63,8 +63,8 @@ const htmlProfiles = (role, response) => {
         <!-- Engineer profile -->
         <div class="box rounded">
           <div class="title-box">
-            <h4 class="name">Name: ${response.name}</h4>
-            <h4 class="role">Role: ${role}</h4>
+            <h5 class="name">Name: ${response.name}</h5>
+            <h5 class="role">Role: ${role}</h5>
           </div>
           <div class="details">
             <table class="table table-dark">
@@ -88,8 +88,8 @@ const htmlProfiles = (role, response) => {
         <!-- Intern profile -->
         <div class="box rounded">
           <div class="title-box">
-            <h4 class="name">Name: ${response.name}</h4>
-            <h4 class="role">Role: ${role}</h4>
+            <h5 class="name">Name: ${response.name}</h5>
+            <h5 class="role">Role: ${role}</h5>
           </div>
           <div class="details">
             <table class="table table-dark">
@@ -110,7 +110,7 @@ const htmlProfiles = (role, response) => {
       `;
     }
   
-    fs.appendFile('index.html', profile, error => {
+    fs.appendFile('./dist/index.html', profile, error => {
       if (error) {
         return (error);
       }
@@ -133,7 +133,7 @@ const htmlEnd = () => {
   </body>
   </html>
   `;
-  fs.appendFile('index.html', end, error => {
+  fs.appendFile('./dist/index.html', end, error => {
     if (error) {
       return (error);
     }
