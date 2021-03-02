@@ -10,12 +10,15 @@
 - [Questions](#questions)
 - [License](#license)
 ---
+## Screenshot of example output:
+![screenshot](./assets/images/screenshot.png)
 
 ## Description:
 ```
-To dynamically create a team profile webpage, using a question/answer
-command-line program to add the responses into HTML. The program uses 
-node.js and the inquirer npm to automate an otherwise time consuming task.
+The purpose of this program is to dynamically create a team profile webpage, 
+using a question/answer command-line to add the responses into HTML. 
+The program uses node.js and the inquirer npm to automate an otherwise 
+time consuming task.
 ```
 ---
 ## Installation:
