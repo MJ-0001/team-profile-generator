@@ -1,4 +1,4 @@
-# Team-Profile_Generator
+# Team-Profile Generator
 
 # Table of Contents
 - [Description](#description)
